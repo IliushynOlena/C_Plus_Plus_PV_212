@@ -186,22 +186,8 @@ public:
         cout << "Enter Education country : "; cin >> education_country ;
         cout << "Enter Number group : "; cin >> number_group ;
     } 
-    void AddMark(int mark)
-    {
-        //int* marks = nullptr;
-        //int markCount = 0;
-        markCount++;
-        int* temp = new int[markCount];
-        for (int i = 0; i < markCount-1; i++)
-        {
-            temp[i] = marks[i];
-        }
-        temp[markCount - 1] = mark;
-        if (marks != nullptr)
-            delete[]marks;
-        marks = temp;
-        SetAverage();
-    }
+    void AddMark(int mark);
+  
     void Delete()
     {
         if (marks != nullptr)
@@ -215,6 +201,23 @@ public:
     }
 #pragma endregion
 };
+
+void Student::AddMark(int mark)
+{
+    //int* marks = nullptr;
+    //int markCount = 0;
+    markCount++;
+    int* temp = new int[markCount];
+    for (int i = 0; i < markCount - 1; i++)
+    {
+        temp[i] = marks[i];
+    }
+    temp[markCount - 1] = mark;
+    if (marks != nullptr)
+        delete[]marks;
+    marks = temp;
+    SetAverage();
+}
 
 int main()
 {
