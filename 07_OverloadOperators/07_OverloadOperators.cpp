@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
 
 class Point
@@ -77,15 +77,15 @@ public:
         this->y = other.y;//7....12
         return *this;
     }
-    bool operator <(const Point& other)
-    {
-       /* if ((this->x + this->y) < (other.x + other.y))
-            return true;
-        else
-            return false;*/
+    //bool operator <(const Point& other)const
+    //{
+    //   /* if ((this->x + this->y) < (other.x + other.y))
+    //        return true;
+    //    else
+    //        return false;*/
 
-        return (this->x + this->y) < (other.x + other.y);
-    }
+    //    return (this->x + this->y) < (other.x + other.y);
+    //}
     bool operator >(const Point& other)
     {
         return (this->x + this->y) > (other.x + other.y);
@@ -108,12 +108,66 @@ public:
         return !(*this == other);
     }
 
+    Point operator++()//префіксна форма
+    {
+        ++this->x;
+        ++this->y;
+        return *this;
+    }
+    Point operator--()//префіксна форма
+    {
+        --this->x;
+        --this->y;
+        return *this;
+    }
+    Point operator++(int k)//постфіксна форма
+    {
+        this->x++;
+        this->y++;
+        return *this;
+    }
+    Point operator--(int)//постфіксна форма
+    {
+        this->x--;
+        this->y--;
+        return *this;
+    }
+    int getX()const
+    {
+        return x;
+    }
+    int getY()const
+    {
+        return y;
+    }
+    friend bool operator <(const Point& point1, const Point& point2);
 };
+
+bool operator <(const Point& point1 ,const Point& point2)
+{
+    return (point1.x + point1.y) < (point2.x + point2.y);
+}
+
+//bool operator <(const Point& point1 ,const Point& point2)
+//{
+//    return (point1.getX() + point1.getY()) < (point2.getX() + point2.getY());
+//}
 
 int main()
 {
     Point point1(10,5);
     Point point2(5,8);
+    cout << (point1 < point2) << endl;
+
+
+    ++point1;
+    --point2;
+    point1--;
+    point2++;
+    cout << "Point 1 : "; point1.Print();
+    cout << "Point 2 : "; point2.Print();
+    cout << endl;
+
 
     if (point1 == point2)//point1.operator<(point2)
     {
