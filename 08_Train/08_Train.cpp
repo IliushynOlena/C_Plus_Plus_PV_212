@@ -95,6 +95,46 @@ public:
 		}
 		return result;
 	}
+	void operator++()
+	{
+		for (int i = 0; i < amount_of_vagons; i++)
+		{
+			vagon[i].amountPasangers++;
+		}
+	}
+
+	Vagon getVagon(int index)
+	{
+		if (index < 0 || index >= amount_of_vagons) return Vagon();//??????
+		return vagon[index];
+	}
+	Vagon operator[](int index)
+	{
+		if (index < 0 || index >= amount_of_vagons) return Vagon();//??????
+		return vagon[index];
+	}
+	void ChangePassangers(int count)
+	{
+		for (int i = 0; i < amount_of_vagons; i++)
+		{
+			vagon[i].amountPasangers += count;
+		}
+	}
+	void operator()(int count)
+	{
+		for (int i = 0; i < amount_of_vagons; i++)
+		{
+			vagon[i].amountPasangers += count;
+		}
+	}
+	void operator()(int count, int number)
+	{
+		for (int i = 0; i < amount_of_vagons; i++)
+		{
+			if(vagon[i].number_Vagony == number)
+				vagon[i].amountPasangers += count;
+		}
+	}
 
 };
 
@@ -115,7 +155,9 @@ void Train::Add_Vagon(Vagon v)// Реалізувати метод додава�
 }
 int main()
 {
+	
 	Train train("Tom");
+
 	train.Show();
 	Vagon v{ 1,15 };
 	train.Add_Vagon(v);
@@ -131,9 +173,25 @@ int main()
 	Train newTrain = Train(train);
 	newTrain.Show();
 
-	cout << "*****************************" << endl;
 
 	Train superTrain = train + newTrain;
 	superTrain.Show();
+	++superTrain;
+	++superTrain;
+	++superTrain;
+	++superTrain;
+	cout << "*****************************" << endl;
+	superTrain.Show();
 
+	Vagon vagon = superTrain.getVagon(0);
+	vagon.Print();
+	vagon = superTrain[1];
+	vagon.Print();
+	superTrain.ChangePassangers(5);
+	cout << "*****************************" << endl;
+	superTrain.Show();
+	superTrain(2);
+	superTrain(20, 3);
+	cout << "*****************************" << endl;
+	superTrain.Show();
 } // виклик деструкторів

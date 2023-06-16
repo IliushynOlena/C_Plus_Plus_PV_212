@@ -141,11 +141,26 @@ public:
         return y;
     }
     friend bool operator <(const Point& point1, const Point& point2);
+    friend ostream& operator<<(ostream& out, const Point& point);
+    friend istream& operator>> (istream& in, const Point& point);
 };
 
 bool operator <(const Point& point1 ,const Point& point2)
 {
     return (point1.x + point1.y) < (point2.x + point2.y);
+}
+
+ostream& operator<<(ostream& out, const Point& point)
+{
+    out << "New : X : " << point.x << " Y: " << point.y << endl;
+    return out;
+}
+istream& operator>> (istream& in, const Point& point)
+{
+    in >> point.x;
+    in.ignore(1);
+    in >> point.y;
+    return in;
 }
 
 //bool operator <(const Point& point1 ,const Point& point2)
@@ -157,6 +172,12 @@ int main()
 {
     Point point1(10,5);
     Point point2(5,8);
+    //int a = 5;
+    //ostream cout;
+    cout << "Enter new point";
+    cin >> point1;//istream
+    //cout << a << endl;
+    cout << point1 << endl;//ostream
     cout << (point1 < point2) << endl;
 
 
