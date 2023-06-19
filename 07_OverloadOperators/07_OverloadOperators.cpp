@@ -107,7 +107,6 @@ public:
         //return (this->x != other.x) || (this->y != other.y);
         return !(*this == other);
     }
-
     Point operator++()//префіксна форма
     {
         ++this->x;
@@ -126,12 +125,7 @@ public:
         this->y++;
         return *this;
     }
-    Point operator--(int)//постфіксна форма
-    {
-        this->x--;
-        this->y--;
-        return *this;
-    }
+   
     int getX()const
     {
         return x;
@@ -142,7 +136,18 @@ public:
     }
     friend bool operator <(const Point& point1, const Point& point2);
     friend ostream& operator<<(ostream& out, const Point& point);
-    friend istream& operator>> (istream& in, const Point& point);
+    friend istream& operator>> (istream& in, Point& point);
+    void setX(int x)
+    {
+        this->x = x;
+    }
+    void setY(int y)
+    {
+        this->y = y;
+    }
+
+    friend Point operator--(Point& mypoint, int);//постфіксна форма
+    
 };
 
 bool operator <(const Point& point1 ,const Point& point2)
@@ -155,13 +160,23 @@ ostream& operator<<(ostream& out, const Point& point)
     out << "New : X : " << point.x << " Y: " << point.y << endl;
     return out;
 }
-istream& operator>> (istream& in, const Point& point)
+istream& operator>> (istream& in, Point& point)
 {
     in >> point.x;
     in.ignore(1);
     in >> point.y;
     return in;
 }
+
+Point operator--(Point &mypoint, int)//постфіксна форма
+{
+    mypoint.x--;
+    mypoint.y--;
+    //mypoint.setX(mypoint.getX()-1);
+    //mypoint.setY(mypoint.getY()-1);   
+    return mypoint;
+}
+
 
 //bool operator <(const Point& point1 ,const Point& point2)
 //{
@@ -172,13 +187,19 @@ int main()
 {
     Point point1(10,5);
     Point point2(5,8);
+    cout << 5 << endl;
+    cout << "Hello world" << endl;
+
+    cout << point1;
+    point1--;
+    cout << "Point 1 : "; point1.Print();
     //int a = 5;
     //ostream cout;
     cout << "Enter new point";
     cin >> point1;//istream
     //cout << a << endl;
-    cout << point1 << endl;//ostream
-    cout << (point1 < point2) << endl;
+    //cout << point1 << endl;//ostream
+    //cout << (point1 < point2) << endl;
 
 
     ++point1;

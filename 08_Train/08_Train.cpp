@@ -136,6 +136,17 @@ public:
 		}
 	}
 
+	operator string()
+	{
+		/*string res = "";
+		for (int i = 0; i < amount_of_vagons; i++)
+		{
+			res += to_string(vagon[i].number_Vagony) + " ";
+		}
+		return res;*/
+		return model;
+	}
+
 };
 
 void Train::Add_Vagon(Vagon v)// Реалізувати метод додавання вагону до динамічного масиву
@@ -194,4 +205,5 @@ int main()
 	superTrain(20, 3);
 	cout << "*****************************" << endl;
 	superTrain.Show();
+	cout << "Numbers all vagons : "<<  (string)superTrain << endl;
 } // виклик деструкторів
