@@ -21,9 +21,19 @@ public:
         head = nullptr;
         tail = nullptr;
     }
+
+    bool IsEmpty()
+    {
+        return head == nullptr;
+    }
     void AddToHead(int value)
     {
         Node* newNode = new Node(nullptr, value, head);//address
+
+        if (IsEmpty())
+        {
+            head = tail = newNode;
+        }
 
         head->prev = newNode;
         head = newNode;;//address
@@ -55,22 +65,17 @@ public:
     }
     void AddToTail(int value)
     {
-    //    Node* newNode = new Node(value, nullptr);
+        Node* newNode = new Node(tail, value, nullptr);
 
-    //    if (head == nullptr)
-    //    {
-    //        head = newNode;
-    //    }
-    //    else
-    //    {
-    //        Node* current = head;//nullptr
-
-    //        while (current->next != nullptr)
-    //        {
-    //            current = current->next;
-    //        }
-    //        current->next = newNode;
-    //    }
+        if (head == nullptr)
+        {
+            head = tail = newNode;
+        }
+        else
+        {         
+            tail->next = newNode;
+            tail = newNode;
+        }
     }
     int GetElement(int pos)
     {
@@ -104,24 +109,19 @@ public:
     }
     void DeleteFromTail()
     {
-        if (head == nullptr)return;
+        if (IsEmpty())return;
         if (head->next == nullptr)
         {
             delete head;
-            head = nullptr;
+            head = tail = nullptr;
+            return;
         }
         else
         {
-            Node* current = head;//300 : nullptr
-            while (current->next->next != nullptr)
-            {
-                current = current->next;
-            }
-            delete current->next;
-            current->next = nullptr;
+            tail = tail->prev;
+            delete tail->next;
+            tail->next = nullptr;
         }
-
-
     }
 };
 int main()
@@ -132,15 +132,17 @@ int main()
           l.AddToHead(i);
       }
       l.PrintList();
-     /* l.AddToTail(100);
-      l.AddToTail(200);*/
-    //l.AddToTail(300);
-    //l.PrintList();
+      l.AddToTail(100);
+      l.AddToTail(200);
+    l.AddToTail(300);
+    l.AddToTail(400);
+    l.AddToTail(500);
+    l.PrintList();
     //cout << "Element by pos 3 : " << l.GetElement(3) << endl;
     //cout << "Element by pos 5 : " << l[5] << endl;
-    //l.DeleteFromTail();
-    ///*  l.DeleteFromTail();
-    //  l.DeleteFromTail();*/
-    //l.PrintList();
+    l.DeleteFromTail();
+    l.DeleteFromTail();
+    l.DeleteFromTail();
+    l.PrintList();
 }
 
