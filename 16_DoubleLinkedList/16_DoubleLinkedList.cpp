@@ -1,18 +1,17 @@
-#include <iostream>
+﻿#include <iostream>
 using namespace std;
-
-struct Node
-{
-    Node* prev;
-    int value;
-    Node* next;
-    Node(Node *prev, int value, Node* next) :prev(prev), value(value), next(next) {}
-
-};
-
+template<class T_data>
 class List
 {
 private:
+    struct Node
+    {
+        Node* prev;
+        T_data value;
+        Node* next;
+        Node(Node* prev, T_data value, Node* next) :prev(prev), value(value), next(next) {}
+    };
+
     Node* head;
     Node* tail;
 public:
@@ -21,12 +20,38 @@ public:
         head = nullptr;
         tail = nullptr;
     }
+    List(const List &other)
+    {
+        for (Node* current = other.head; current != nullptr; current = current->next)
+        {
+            this->AddToTail(current->value);
+        }
+    }
+    void Clear()
+    {
+        Node* current = nullptr;
+        while (head != nullptr)
+        {
+            current = head;
+            head = head->next;
+            delete current;
+        }
+    }
 
+    List& operator = (const List& other)
+    {
+        Clear();
+        for (Node* current = other.head; current != nullptr; current = current->next)
+        {
+            this->AddToTail(current->value);
+        }
+        return *this;
+    }
     bool IsEmpty()
     {
         return head == nullptr;
     }
-    void AddToHead(int value)
+    void AddToHead(T_data value)
     {
         Node* newNode = new Node(nullptr, value, head);//address
 
@@ -34,7 +59,6 @@ public:
         {
             head = tail = newNode;
         }
-
         head->prev = newNode;
         head = newNode;;//address
     }
@@ -49,7 +73,7 @@ public:
 
         for (Node* current = head; current != nullptr; current = current->next)
         {
-            cout << current->value << " ";
+            cout << current->value << " ";//value -> 
         }
         cout << endl;
     }
@@ -63,7 +87,7 @@ public:
             delete current;
         }
     }
-    void AddToTail(int value)
+    void AddToTail(T_data value)
     {
         Node* newNode = new Node(tail, value, nullptr);
 
@@ -77,7 +101,7 @@ public:
             tail = newNode;
         }
     }
-    int GetElement(int pos)
+    T_data GetElement(int pos)
     {
         Node* current = head;
         //index
@@ -96,7 +120,7 @@ public:
             i++;
         }
     }
-    int operator[](int pos)
+    T_data operator[](int pos)
     {
         Node* current = head;
         int i = 1;
@@ -124,25 +148,113 @@ public:
         }
     }
 };
+
+struct Vagon
+{
+	int number_Vagony;// номер вагону
+	int amount_Of_Pasanger_Place;// кількість місць
+	int amountPasangers;// кількість пасажирів
+	Vagon() :number_Vagony(0), amount_Of_Pasanger_Place(0), amountPasangers(0) {}
+	Vagon(int num, int places)
+	{
+		number_Vagony = num;
+		amount_Of_Pasanger_Place = places;
+		amountPasangers = 0;
+	}
+	Vagon(int n, int p, int pass) :number_Vagony(n), amount_Of_Pasanger_Place(p), amountPasangers(pass) {}
+	void Print()
+	{
+		cout << "Number : " << number_Vagony << endl;
+		cout << "amount_Of_Pasanger_Place : " << amount_Of_Pasanger_Place << endl;
+		cout << "amountPasangers : " << amountPasangers << endl;
+	}
+};
+ostream& operator << (ostream& out, const Vagon& other)
+{
+    out << "Number : " << other.number_Vagony << endl;
+    out << "amount_Of_Pasanger_Place : " << other.amount_Of_Pasanger_Place << endl;
+    out << "amountPasangers : " << other.amountPasangers << endl;
+    return out;
+}
+
+class Train
+{
+	string model;// модель
+	int amount_of_vagons;// кількість вагонів
+	List<Vagon> vagons;
+public:
+	Train()
+	{
+		model = "no model";
+		amount_of_vagons = 0;
+	}
+	Train(string model)// В класі потяг оголосити дефолтний конструктор і перезавантажений конструктор.
+	{
+		this->model = model;
+		this->amount_of_vagons = 0;
+	}
+	Train(const Train& other):vagons(vagons)
+	{
+		this->model = other.model;
+		this->amount_of_vagons = other.amount_of_vagons;
+        //this->vagons = other.vagons;//operator =		
+	}
+	void Show()//Реалізувати метод Show()
+	{
+		cout << "Name Train : " << model << endl;
+		cout << "Number of wagons : " << amount_of_vagons << endl;
+		vagons.PrintList();
+
+	}
+    void Add_VagonToTail(Vagon v)// Реалізувати метод додавання вагону до динамічного масиву
+    {
+        vagons.AddToTail(v);
+        amount_of_vagons++;
+    }
+    void AddVagonToHead()
+    {
+
+    }
+    void DeleteVagonFromHead();
+    void DeleteVagonFromTail();
+	
+	
+};
+
+
 int main()
 {
-    List l;
-      for (int i = 0; i < 10; i++)
-      {
-          l.AddToHead(i);
-      }
-      l.PrintList();
-      l.AddToTail(100);
-      l.AddToTail(200);
-    l.AddToTail(300);
-    l.AddToTail(400);
-    l.AddToTail(500);
-    l.PrintList();
-    //cout << "Element by pos 3 : " << l.GetElement(3) << endl;
-    //cout << "Element by pos 5 : " << l[5] << endl;
-    l.DeleteFromTail();
-    l.DeleteFromTail();
-    l.DeleteFromTail();
-    l.PrintList();
+    Train train("Tom");
+    train.Add_VagonToTail(Vagon{ 1,20,3 });
+    train.Add_VagonToTail(Vagon{ 2,10,7 });
+    train.Add_VagonToTail(Vagon{ 3,15,12 });
+    train.Add_VagonToTail(Vagon{ 4,10,8 });
+    train.Add_VagonToTail(Vagon{ 5,25,24 });
+    train.Show();
+
+    Train newTrain(train);
+    newTrain.Show();
+
+
+    newTrain = train;
+
+    //List l;
+    //  for (int i = 0; i < 10; i++)
+    //  {
+    //      l.AddToHead(i);
+    //  }
+    //  l.PrintList();
+    //  l.AddToTail(100);
+    //  l.AddToTail(200);
+    //l.AddToTail(300);
+    //l.AddToTail(400);
+    //l.AddToTail(500);
+    //l.PrintList();
+    ////cout << "Element by pos 3 : " << l.GetElement(3) << endl;
+    ////cout << "Element by pos 5 : " << l[5] << endl;
+    //l.DeleteFromTail();
+    //l.DeleteFromTail();
+    //l.DeleteFromTail();
+    //l.PrintList();
 }
 
