@@ -14,11 +14,13 @@ private:
 
     Node* head;
     Node* tail;
+    int size;
 public:
     List()
     {
         head = nullptr;
         tail = nullptr;
+        size = 0;
     }
     List(const List &other)
     {
@@ -37,7 +39,6 @@ public:
             delete current;
         }
     }
-
     List& operator = (const List& other)
     {
         Clear();
@@ -61,6 +62,7 @@ public:
         }
         head->prev = newNode;
         head = newNode;;//address
+        size++;
     }
     void PrintList()const
     {
@@ -100,6 +102,7 @@ public:
             tail->next = newNode;
             tail = newNode;
         }
+        size++;
     }
     T_data GetElement(int pos)
     {
@@ -146,6 +149,66 @@ public:
             delete tail->next;
             tail->next = nullptr;
         }
+        size--;
+    }
+    void DeleteFromHead()
+    {
+        if (IsEmpty()) return;
+        
+        if (head->next == nullptr)
+        {
+            delete head;
+            head = tail = nullptr;
+        }
+        else
+        {
+            Node* nodeToDelete = head->next;
+            delete head;
+            head = nodeToDelete;
+        }
+        size--;
+    }
+    int GetLength()
+    {
+        return size;
+    }
+    void DeleteByPosition(int pos)
+    {
+        if (pos < 1 || pos > size)return;
+        else if (pos == 1)
+        {
+            DeleteFromHead();
+        }
+        else if (pos == size)
+        {
+            DeleteFromTail();
+        }
+        else
+        {
+            Node* current = nullptr;// = head;
+
+            if (pos <= size / 2)
+            {
+                current = head;
+                for (int i = 1; i < pos; i++)
+                {
+                    current = current->next;
+                }
+            }
+            else
+            {
+                current = tail;
+                for (int i = size; i >  pos; i--)
+                {
+                    current = current->prev;
+                }
+            }           
+            current->next->prev = current->prev;
+            current->prev->next = current->next;
+            delete current;
+            size--;
+        }      
+      
     }
 };
 
@@ -176,7 +239,6 @@ ostream& operator << (ostream& out, const Vagon& other)
     out << "amountPasangers : " << other.amountPasangers << endl;
     return out;
 }
-
 class Train
 {
 	string model;// модель
@@ -218,13 +280,14 @@ public:
     void DeleteVagonFromHead();
     void DeleteVagonFromTail();
 	
+    
 	
 };
 
 
 int main()
 {
-    Train train("Tom");
+  /*  Train train("Tom");
     train.Add_VagonToTail(Vagon{ 1,20,3 });
     train.Add_VagonToTail(Vagon{ 2,10,7 });
     train.Add_VagonToTail(Vagon{ 3,15,12 });
@@ -236,14 +299,23 @@ int main()
     newTrain.Show();
 
 
-    newTrain = train;
+    newTrain = train;*/
 
-    //List l;
-    //  for (int i = 0; i < 10; i++)
-    //  {
-    //      l.AddToHead(i);
-    //  }
-    //  l.PrintList();
+    List<int> l;
+      for (int i = 0; i < 10; i++)
+      {
+          l.AddToHead(i);
+      }
+      l.PrintList();
+      cout << "Length : " << l.GetLength() << endl;
+      l.DeleteByPosition(3);
+      l.PrintList();
+      cout << "Length : " << l.GetLength() << endl;
+      l.DeleteByPosition(1);
+      l.PrintList();
+      cout << "Length : " << l.GetLength() << endl;
+      l.DeleteByPosition(8);
+      l.PrintList();
     //  l.AddToTail(100);
     //  l.AddToTail(200);
     //l.AddToTail(300);
