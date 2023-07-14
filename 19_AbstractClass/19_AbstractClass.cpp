@@ -107,6 +107,7 @@ void RollCall(Animal &animal)
     animal.MakeSound();
     animal.Move();
     animal.Print();
+    
     cout << "___________________________" << endl;
 }
 
