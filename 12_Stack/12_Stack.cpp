@@ -66,7 +66,7 @@ class Stack
     int top;
 public:
     Stack() = delete;
-    Stack(int size):size(size)
+    explicit Stack(int size):size(size)
     {
         arr = new int[size];
         top = EMPTY;
@@ -129,8 +129,15 @@ bool IsValidCode(string code)
     return stack.IsEmpty();
 }
 
+int A = 10;
+
 int main()
 {
+
+    int A = 100;
+    cout << A << endl;
+    cout << ::A << endl;
+
     string code = "class Stack{ Stack({{{) void Print(){ for () { if(){}}}};";
 
     if (IsValidCode(code))
@@ -139,7 +146,8 @@ int main()
         cout << "Code is invalid" << endl;
 
 
-    Stack st(15);
+    Stack st(15);//ctor explicit
+    //Stack st = 15;//implicit - explicit
     cout << "Count of element in Stack " << st.GetCount() << endl;
     st.Push(33);
     st.Push(12);

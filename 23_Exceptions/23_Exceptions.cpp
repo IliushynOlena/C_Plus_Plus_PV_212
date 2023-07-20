@@ -86,6 +86,7 @@ private:
 	int* arr;
 	int size;
 public:
+	
 	MyArr(int size = 10):size(size)
 	{
 		arr = new int[size];
@@ -132,9 +133,11 @@ public:
 	}
 	void Print()const
 	{
+		//this->size = 10;
 		for (int i = 0; i < size; i++)
 		{
-			cout << arr[i] << " ";
+			//this->arr[i] = 0;
+			cout << this->arr[i] << " ";
 		}
 		cout << endl;
 	}

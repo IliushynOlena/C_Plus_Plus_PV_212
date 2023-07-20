@@ -15,13 +15,13 @@ private:
     int weight;
     static int countHuman;
 public:
-     static int getCount()
-    {
-        
+    static int getCount()
+    {      
         return countHuman;
     }
     Human():name(""),age(0),weight(0)
     {
+        
         
         countHuman++;
         //name = "";
@@ -30,6 +30,7 @@ public:
     }
     Human(string name): Human()
     {
+
         this->name = name;
         //age = 0;
         //weight = 0;
