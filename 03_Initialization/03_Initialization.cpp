@@ -30,13 +30,13 @@ public:
         this->y = y;
     }
 };
-class Rectangle
+class RectangleNew
 {
     Point leftUpCorner;//default 
     int width;
     int height;
 public:
-    Rectangle(): width(0),height(0)
+    RectangleNew(): width(0),height(0)
     {
         leftUpCorner.setX(0);
         leftUpCorner.setY(0);
@@ -44,7 +44,7 @@ public:
         //height = 0;
         cout << "Default constructor" << endl;
     }
-    Rectangle(int x, int y, int w, int h):width(w), height(h)
+    RectangleNew(int x, int y, int w, int h):width(w), height(h)
     {
         leftUpCorner.setX(x);
         leftUpCorner.setY(y);
@@ -61,9 +61,9 @@ public:
 };
 int main()
 {
-    Rectangle r;
+    RectangleNew r;
     r.Print();
-    Rectangle r2{ 5,5,25,14 };
+    RectangleNew r2{ 5,5,25,14 };
     r2.Print();
 
 

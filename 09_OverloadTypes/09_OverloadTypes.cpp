@@ -1,15 +1,15 @@
 #include <iostream>
 using namespace std;
 class Square;
-class Rectangle
+class RectangleNew
 {
 private:
     int height;
     int width;
 public:
-    Rectangle() :height(0), width(0) {}
-    explicit Rectangle(int value) :height(value), width(value) {}
-    Rectangle(int height, int width) :height(height), width(width) {}
+    RectangleNew() :height(0), width(0) {}
+    explicit RectangleNew(int value) :height(value), width(value) {}
+    RectangleNew(int height, int width) :height(height), width(width) {}
     void Print()const
     {
         cout << "Height :" << height << " ";
@@ -39,27 +39,27 @@ public:
         cout << "Side :" << side << " ";
         cout << "Side :" << side << endl;
     }
-     operator Rectangle()
+     operator RectangleNew()
     {
-        Rectangle rect(side, side+10);
+        RectangleNew rect(side, side+10);
         return rect;
     }
 };
 
 
-Rectangle::operator Square()
+RectangleNew::operator Square()
 {
     return Square(height + width);
 }
 int main()
 {
-    Rectangle rect1(100);//parametrized ctor
+    RectangleNew rect1(100);//parametrized ctor
     //Rectangle rect2 = 1000;
 
     int value = 9;
     double valDouble = value;//9.00000000000 -> int - double // standart to standart
     int a = (int)3.33;// standart to standart
-    Rectangle rect(10, 15);// standart to abstract
+    RectangleNew rect(10, 15);// standart to abstract
     Square sq(7);// standart to abstract
     rect.Print();
     sq.Print();
