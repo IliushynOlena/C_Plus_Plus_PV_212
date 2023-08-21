@@ -3,6 +3,7 @@
 #include <map>
 #include <list>
 #include <string>
+#include <fstream>
 using namespace std;
 
 class Dictionary
@@ -10,6 +11,7 @@ class Dictionary
 	string name;
 	map<string, list<string>> words;
 public:
+	Dictionary() :name("no name") {}
 	Dictionary(string name) :name(name) {}
 	void PrintDictionary()
 	{
@@ -36,9 +38,47 @@ public:
 	{
 		words[word].push_back(traslation);
 	}
+	friend ostream& operator << (ostream& out, const Dictionary& d);
+	friend istream& operator >> (istream& in, Dictionary& d);
 };
+ostream& operator << (ostream& out, const Dictionary& d)
+{
+	out << d.name << endl;
+	for (auto pair : d.words)
+	{
+		out << pair.first << endl;
+		for (string t : pair.second)
+		{
+			out << t << endl;
+		}
+		out << "-" << endl;
+	}
+	return out;
+}
+istream& operator >> (istream& in,  Dictionary& d)
+{
+	getline(in, d.name);//in >> d.name;
+	while (!in.eof())
+	{
+		string word;
+		getline(in, word);//in >> word;
+		if (word.empty())break;
+		list<string> list;
+		string translation = "-";
+		do
+		{
+			getline(in, translation);//in >> translation;
+			if(translation != "-")
+				list.push_back(translation);
+		} while (translation != "-");
+		d.words.insert(make_pair(word, list));
+	}
+	return in;
+}
+
 int main()
 {
+	/*
 	Dictionary dic("English-Ukrainian");
 
 	dic.AddNewWord("run", { "bigtu", "zapochatkyvatu", "pochatu" });
@@ -46,6 +86,9 @@ int main()
 	dic.AddNewWord("bad", { "luxo", "poganuy", "borg", "deficit" });
 	dic.PrintDictionary();
 
+	ofstream out("dictionary.txt", ios_base::out);
+	out << dic;
+	out.close();
 	//////////////////// add translate
 	string input = "";//run
 	cout << "Enter word to add translatins: "; getline(cin, input);
@@ -65,6 +108,14 @@ int main()
 		} while (!translate.empty());
 	}
 	dic.PrintDictionary();
+	*/
+	Dictionary read;
+	ifstream in("dictionary.txt", ios_base::in);
+	in >> read;
+	in.close();
+	read.PrintDictionary();
+
+
 	/*
 	setlocale(LC_CTYPE, "ukr");
 
