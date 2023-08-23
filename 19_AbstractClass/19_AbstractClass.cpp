@@ -102,11 +102,11 @@ public:
 
 };
 
-void RollCall(Animal &animal)
+void RollCall(Animal *animal)
 {
-    animal.MakeSound();
-    animal.Move();
-    animal.Print();
+    animal->MakeSound();
+    animal->Move();
+    animal->Print();
     
     cout << "___________________________" << endl;
 }
@@ -125,9 +125,40 @@ int main()
     lion.Move();
     lion.Print();*/
     cout << "----------------------" << endl;
-    RollCall(duck);
-    RollCall(lion);
-    RollCall(frog);
+    RollCall(&duck);
+    RollCall(&lion);
+    RollCall(&frog);
+    Animal* zoo1[3]
+    {
+        &frog, &duck, &lion
+    };
+
+
+    Animal* zoo2[3]
+    {
+        new Lion(190,75,"Predator","King Lion","Africa",114),
+        new Duck(1,15,"Bird","Donald Duck","Lake",2),
+        new Frog(0.10, 16, "Reptile", "Crazy Frog", "Boloto", 0.5, 30)
+    };
+    for (int i = 0; i < 3; i++)
+    {
+        RollCall(zoo2[i]);
+    }
+
+    for (int i = 0; i < 3; i++)
+    {
+        delete zoo2[i];
+    }
+
+    unique_ptr<Animal> zoo2[3]
+    {
+        make_unique<Animal>(Lion(190,75,"Predator","King Lion","Africa",114)),
+        make_unique<Animal>(Duck(1,15,"Bird","Donald Duck","Lake",2)),
+        make_unique<Animal>(Frog(0.10, 16, "Reptile", "Crazy Frog", "Boloto", 0.5, 30))      
+    };
+
+   
+
     //Animal animal;
     //animal.Move();
     //animal.Print();

@@ -67,6 +67,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "31_Multimap", "31_Multimap\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "32_Set", "32_Set\32_Set.vcxproj", "{BE85C7C0-BC43-4801-8D3C-2CDFE09747B0}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "33_SmartPointer", "33_SmartPointer\33_SmartPointer.vcxproj", "{99E11040-9D4F-49AC-8211-DCFF86BC7581}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -331,6 +333,14 @@ Global
 		{BE85C7C0-BC43-4801-8D3C-2CDFE09747B0}.Release|x64.Build.0 = Release|x64
 		{BE85C7C0-BC43-4801-8D3C-2CDFE09747B0}.Release|x86.ActiveCfg = Release|Win32
 		{BE85C7C0-BC43-4801-8D3C-2CDFE09747B0}.Release|x86.Build.0 = Release|Win32
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Debug|x64.ActiveCfg = Debug|x64
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Debug|x64.Build.0 = Debug|x64
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Debug|x86.ActiveCfg = Debug|Win32
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Debug|x86.Build.0 = Debug|Win32
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Release|x64.ActiveCfg = Release|x64
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Release|x64.Build.0 = Release|x64
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Release|x86.ActiveCfg = Release|Win32
+		{99E11040-9D4F-49AC-8211-DCFF86BC7581}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
