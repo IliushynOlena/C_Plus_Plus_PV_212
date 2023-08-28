@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 using namespace std;
 
 class Animal // abstract class
@@ -133,6 +134,12 @@ int main()
         &frog, &duck, &lion
     };
 
+    list<Animal*> animals;
+    animals.push_back(&frog);
+    animals.push_back(&(Frog(0.10, 16, "Reptile", "Crazy Frog", "Boloto", 0.5, 30)));
+    
+
+
 
     Animal* zoo2[3]
     {
@@ -150,7 +157,7 @@ int main()
         delete zoo2[i];
     }
 
-    unique_ptr<Animal> zoo2[3]
+    unique_ptr<Animal> zoo3[3]
     {
         make_unique<Animal>(Lion(190,75,"Predator","King Lion","Africa",114)),
         make_unique<Animal>(Duck(1,15,"Bird","Donald Duck","Lake",2)),
