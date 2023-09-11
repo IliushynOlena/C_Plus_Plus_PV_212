@@ -34,6 +34,7 @@ public:
     }
     int getDay() const
     {
+        
         return day;
     }    
     void Show()

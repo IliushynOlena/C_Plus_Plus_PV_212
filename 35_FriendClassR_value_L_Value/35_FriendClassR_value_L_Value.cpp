@@ -137,8 +137,16 @@ public:
     }
 
 };
+
+int A = 100;
 int main()
 {
+
+    int A = 10;
+    cout << A << endl;
+    cout << ::A << endl;
+
+    MyRectangle r;
     Image img;
     img.GetImageInfo();
     cout << "-------------------------" << endl;

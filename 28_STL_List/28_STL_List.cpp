@@ -156,7 +156,14 @@ void main()
 		cout << b.name << " " << b.author << " " << b.pages << endl;
 	}
 	//CompareBookByName(b1,b2);
+	/*bool CompareBookByName(const Book & b1, const Book & b2)
+	{
+		return b1.name < b2.name;
+	}
+	*/
+	//cout << CompareBookByName << endl;
 	library.sort(CompareBookByName);
+	///library.sort([](const Book& a, const Book& b){ return a.name < b.name; });
 	cout << "\t---------Original list afret sort: -----------\n";
 	for (Book b : library)
 	{
